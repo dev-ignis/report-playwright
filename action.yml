@@ -1,9 +1,9 @@
-name: 'Playwright report comment'
+name: 'Report Playwright'
 description: 'Report Playwright test results as pull request comments'
 author: 'Ignis <maildevcom@gmail.com>'
 
 branding:
-  icon: 'comment-discussion'
+  icon: 'message-square'
   color: 'red'
 
 inputs:
