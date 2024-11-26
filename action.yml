@@ -1,0 +1,45 @@
+name: 'Playwright report comment'
+description: 'Report Playwright test results as pull request comments'
+author: 'Ignis <maildevcom@gmail.com>'
+
+branding:
+  icon: 'comment-discussion'
+  color: 'red'
+
+inputs:
+  github-token:
+    description: 'GitHub access token'
+    required: false
+    default: ${{ github.token }}
+  report-file:
+    description: 'Path to the generated json report file'
+    required: true
+  comment-title:
+    description: 'Customize the title of the pull request comment'
+    required: false
+    default: 'Playwright test results'
+  custom-info:
+    description: 'Additional information to include in the summary comment, markdown-formatted'
+    required: false
+  job-summary:
+    description: 'Create a job summary comment for the workflow run'
+    required: false
+    default: 'false'
+  icon-style:
+    description: 'The icons to use: octicons or emoji'
+    required: false
+    default: 'octicons'
+  footer:
+    description: 'Additional content to add to the comment below the test report'
+    required: false
+    default: ''
+
+outputs:
+  summary:
+    description: 'The rendered markdown summary of the test report'
+  comment-id:
+    description: 'The ID of the comment that was created or updated'
+
+runs:
+  using: node20
+  main: dist/index.js
