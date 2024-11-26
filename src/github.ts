@@ -41,6 +41,14 @@ export async function updateIssueComment(
 	return comment
 }
 
+export async function deleteIssueComment(
+	octokit: Octokit,
+	params: { owner: string; repo: string; comment_id: number; body: string }
+): Promise<IssueComment> {
+	const { data: comment } = await octokit.rest.issues.deleteComment(params)
+	return comment
+}
+
 export async function createPullRequestReview(
 	octokit: Octokit,
 	params: { owner: string; repo: string; pull_number: number; body: string }

@@ -148,6 +148,7 @@ export async function report(): Promise<void> {
 
 		if (commentId) {
 			console.log(`Found previous comment #${commentId}`)
+			console.log("deleteIssueComment >>>")
 			try {
 				await updateIssueComment(octokit, { owner, repo, comment_id: commentId, body })
 				console.log(`Updated previous comment #${commentId}`)
