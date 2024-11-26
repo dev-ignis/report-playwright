@@ -1,5 +1,5 @@
 name: 'Report Playwright'
-description: 'Report Playwright test results as pull request comments'
+description: 'Report Playwright test results'
 author: 'Ignis <maildevcom@gmail.com>'
 
 branding:
