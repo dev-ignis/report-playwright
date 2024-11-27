@@ -151,6 +151,7 @@ export async function report(): Promise<void> {
 			console.log(`Found previous comment #${commentId}, Deleting...`)
 			try {
 				await deleteIssueComment(octokit, { owner, repo, comment_id: commentId, body })
+				commentId = null
 			} catch (error: unknown) {
 				console.error(`Error deleting existing comment: ${(error as Error).message}`)
 				commentId = null
