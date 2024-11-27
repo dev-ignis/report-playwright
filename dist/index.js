@@ -30147,6 +30147,7 @@ async function report() {
     const customInfo = (0, core_1.getInput)('custom-info');
     const iconStyle = (0, core_1.getInput)('icon-style') || 'octicons';
     const jobSummary = (0, core_1.getInput)('job-summary') ? (0, core_1.getBooleanInput)('job-summary') : false;
+    const writeNewComment = (0, core_1.getInput)('write-new-comment') ? (0, core_1.getBooleanInput)('write-new-comment') : false;
     const testCommand = (0, core_1.getInput)('test-command');
     const footer = (0, core_1.getInput)('footer');
     (0, core_1.debug)(`Report file: ${reportFile}`);
@@ -30225,9 +30226,19 @@ async function report() {
         catch (error) {
             console.error(`Error fetching existing comments: ${error.message}`);
         }
+        if (writeNewComment && commentId) {
+            console.log(`Found previous comment #${commentId}, Deleting...`);
+            try {
+                await (0, github_2.deleteIssueComment)(octokit, { owner, repo, comment_id: commentId, body });
+                commentId = null;
+            }
+            catch (error) {
+                console.error(`Error deleting existing comment: ${error.message}`);
+                commentId = null;
+            }
+        }
         if (commentId) {
             console.log(`Found previous comment #${commentId}`);
-            console.log('deleteIssueComment >>>');
             try {
                 await (0, github_2.updateIssueComment)(octokit, { owner, repo, comment_id: commentId, body });
                 console.log(`Updated previous comment #${commentId}`);

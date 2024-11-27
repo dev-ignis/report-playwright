@@ -18,7 +18,8 @@ import {
 	createIssueComment,
 	updateIssueComment,
 	createPullRequestReview,
-	getPullRequestInfo, deleteIssueComment
+	getPullRequestInfo,
+	deleteIssueComment
 } from './github'
 
 /**
