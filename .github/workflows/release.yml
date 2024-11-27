@@ -23,7 +23,7 @@ jobs:
         uses: actions/checkout@master
 
       - name: Echo changelog
-        run: echo ${{ needs.changelog.outputs.* }}
+        run: echo ${{ needs.changelog.outputs.*.* }}
 
       - name: Create Release
         id: create_release
@@ -35,6 +35,6 @@ jobs:
           release_name: ${{ github.ref }}
           body: |
             Changes in this Release
-            ${{ needs.changelog.outputs }}
+            ${{ needs.changelog.outputs.*.* }}
           draft: false
           prerelease: false
