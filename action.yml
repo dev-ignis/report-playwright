@@ -3,7 +3,7 @@ description: 'Report Playwright test results'
 author: 'Ignis <maildevcom@gmail.com>'
 
 branding:
-  icon: 'message-square'
+  icon: 'save'
   color: 'red'
 
 inputs:
