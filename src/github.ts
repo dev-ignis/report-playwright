@@ -1,6 +1,5 @@
 import { getOctokit } from '@actions/github'
 
-// eslint-disable-next-line import/no-unresolved
 import { components } from '@octokit/openapi-types'
 
 type IssueComment = components['schemas']['issue-comment']

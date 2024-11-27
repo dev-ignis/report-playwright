@@ -199,10 +199,10 @@ export function renderReportSummary(
 	// Passed/failed tests
 
 	const tests = [
-		failed.length ? `${icon('failed')}  **${failed.length} failed**` : ``,
-		passed.length ? `${icon('passed')}  **${passed.length} passed**  ` : ``,
-		flaky.length ? `${icon('flaky')}  **${flaky.length} flaky**  ` : ``,
-		skipped.length ? `${icon('skipped')}  **${skipped.length} skipped**` : ``
+		failed.length ? `${icon('failed')} &nbsp;**${failed.length} failed**` : ``,
+		passed.length ? `${icon('passed')} &nbsp;**${passed.length} passed**  ` : ``,
+		flaky.length ? `${icon('flaky')} &nbsp;**${flaky.length} flaky**  ` : ``,
+		skipped.length ? `${icon('skipped')} &nbsp;**${skipped.length} skipped**` : ``
 	]
 	paragraphs.push(tests.filter(Boolean).join('  \n'))
 
@@ -214,15 +214,15 @@ export function renderReportSummary(
 	const commitText = commitUrl ? `[${shortCommit}](${commitUrl})` : shortCommit
 
 	const stats = [
-		reportUrl ? `${icon('report')}  [Open report ↗︎](${reportUrl})` : '',
-		`${icon('stats')}  ${report.tests.length} ${n('test', report.tests.length)} across ${report.suites.length} ${n(
+		reportUrl ? `${icon('report')} &nbsp;[Open report ↗︎](${reportUrl})` : '',
+		`${icon('stats')} &nbsp;${report.tests.length} ${n('test', report.tests.length)} across ${report.suites.length} ${n(
 			'suite',
 			report.suites.length
 		)}`,
-		`${icon('duration')}  ${duration ? formatDuration(duration) : 'unknown'}`,
-		commitText && message ? `${icon('commit')}  ${message} (${commitText})` : '',
-		commitText && !message ? `${icon('commit')}  ${commitText}` : '',
-		customInfo ? `${icon('info')}  ${customInfo}` : ''
+		`${icon('duration')} &nbsp;${duration ? formatDuration(duration) : 'unknown'}`,
+		commitText && message ? `${icon('commit')} &nbsp;${message} (${commitText})` : '',
+		commitText && !message ? `${icon('commit')} &nbsp;${commitText}` : '',
+		customInfo ? `${icon('info')} &nbsp;${customInfo}` : ''
 	]
 	paragraphs.push(stats.filter(Boolean).join('  \n'))
 
