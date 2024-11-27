@@ -6,14 +6,6 @@ on:
 name: 'Release New Version'
 
 jobs:
-#  changelog:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: "✏️ Generate release changelog"
-#        uses: janheinrichmerker/action-github-changelog-generator@v2.3
-#        with:
-#          token: ${{ secrets.GITHUB_TOKEN }}
-
   build:
     name: Create Release
     runs-on: ubuntu-latest
@@ -21,24 +13,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@master
 
-      - name: Echo changelog
-        run: echo ${{ needs.changelog.outputs.*.* }}
-
-#      - name: Create Release
-#        id: create_release
-#        uses: actions/create-release@latest
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#        with:
-#          tag_name: ${{ github.ref }}
-#          release_name: ${{ github.ref }}
-#          body: |
-#            Changes in this Release
-#            ${{ needs.changelog.outputs.*.* }}
-#          draft: false
-#          prerelease: false
-
-      - name: Create Release Custom
+      - name: Create Release With Notes
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ github.ref_name }}
