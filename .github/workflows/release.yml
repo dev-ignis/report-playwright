@@ -1,17 +1,27 @@
 on:
   push:
     tags:
-      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+      - 'v*'
 
 name: 'Release New Version'
 
 jobs:
+  changelog:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "✏️ Generate release changelog"
+        uses: janheinrichmerker/action-github-changelog-generator@v2.3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
   build:
     name: Create Release
+    needs: changelog
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@master
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@latest
@@ -22,7 +32,6 @@ jobs:
           release_name: Release ${{ github.ref }}
           body: |
             Changes in this Release
-            - First Change
-            - Second Change
+            ${{ steps.changelog.output }}
           draft: false
           prerelease: false
