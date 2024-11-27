@@ -18,6 +18,10 @@ inputs:
     description: 'Customize the title of the pull request comment'
     required: false
     default: 'Playwright test results'
+  write-new-comment:
+    description: 'Delete previously posted comment'
+    required: false
+    default: 'false'
   custom-info:
     description: 'Additional information to include in the summary comment, markdown-formatted'
     required: false

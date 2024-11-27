@@ -18,7 +18,7 @@ import {
 	createIssueComment,
 	updateIssueComment,
 	createPullRequestReview,
-	getPullRequestInfo
+	getPullRequestInfo, deleteIssueComment
 } from './github'
 
 /**
@@ -56,6 +56,7 @@ export async function report(): Promise<void> {
 	const customInfo = getInput('custom-info')
 	const iconStyle = getInput('icon-style') || 'octicons'
 	const jobSummary = getInput('job-summary') ? getBooleanInput('job-summary') : false
+	const writeNewComment = getInput('write-new-comment') ? getBooleanInput('write-new-comment') : false
 	const testCommand = getInput('test-command')
 	const footer = getInput('footer')
 
@@ -146,9 +147,18 @@ export async function report(): Promise<void> {
 			console.error(`Error fetching existing comments: ${(error as Error).message}`)
 		}
 
+		if (writeNewComment && commentId) {
+			console.log(`Found previous comment #${commentId}, Deleting...`)
+			try {
+				await deleteIssueComment(octokit, { owner, repo, comment_id: commentId, body })
+			} catch (error: unknown) {
+				console.error(`Error deleting existing comment: ${(error as Error).message}`)
+				commentId = null
+			}
+		}
+
 		if (commentId) {
 			console.log(`Found previous comment #${commentId}`)
-			console.log('deleteIssueComment >>>')
 			try {
 				await updateIssueComment(octokit, { owner, repo, comment_id: commentId, body })
 				console.log(`Updated previous comment #${commentId}`)
