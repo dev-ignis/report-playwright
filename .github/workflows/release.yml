@@ -10,8 +10,11 @@ jobs:
     name: Create Release
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@master
+
+      - name: Update Package
+        run: npm ci && npm run all
 
       - name: Create Release With Notes
         env:
